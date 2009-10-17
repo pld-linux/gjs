@@ -2,7 +2,7 @@ Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
 Version:	0.4
-Release:	1
+Release:	2
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.4/%{name}-%{version}.tar.bz2
@@ -59,7 +59,7 @@ Pliki nagłówkowe biblioteki gjs.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__make} install \
+%{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 cp examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
