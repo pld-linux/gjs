@@ -1,12 +1,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	0.4
-Release:	2
+Version:	0.5
+Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	584594b22e433d56d660a7dda650809d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	b1fcaa8a80204608e79daa49c27cbefa
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -89,6 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gjs-1.0/debugger.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/gettextNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/gi.so
+%attr(755,root,root) %{_libdir}/gjs-1.0/langNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/mainloop.so
 %{_datadir}/gjs-1.0
 
