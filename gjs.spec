@@ -1,19 +1,19 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	0.5
+Version:	0.6
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	b1fcaa8a80204608e79daa49c27cbefa
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	0667ee25bc89eeea2fede223be82df81
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
-BuildRequires:	gobject-introspection-devel >= 0.6.3
+BuildRequires:	gobject-introspection-devel >= 0.6.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -35,7 +35,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	gobject-introspection-devel
+Requires:	gobject-introspection-devel >= 0.6.8
 Requires:	xulrunner-devel
 
 %description devel
@@ -85,6 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgjs.so.0
 %dir %{_libdir}/gjs-1.0
+%attr(755,root,root) %{_libdir}/gjs-1.0/cairoNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/console.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/dbusNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/debugger.so
