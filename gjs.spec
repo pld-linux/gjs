@@ -7,6 +7,7 @@ License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.7/%{name}-%{version}.tar.bz2
 # Source0-md5:	e4362407d5df0422fc526893d7f0097a
+Patch0:		gobject-introspection.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -46,6 +47,7 @@ Pliki nagłówkowe biblioteki gjs.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
