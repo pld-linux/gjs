@@ -1,12 +1,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	0.7.4
+Version:	0.7.5
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	e9205b087d0174b2440c30af9e8872b4
+# Source0-md5:	e832a9dcc20160b10d271dff0ddf74f6
 Patch0:		%{name}-rpath.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
@@ -14,7 +14,7 @@ BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
-BuildRequires:	gobject-introspection-devel >= 0.6.8
+BuildRequires:	gobject-introspection-devel >= 0.9.5
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -36,7 +36,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	gobject-introspection-devel >= 0.6.8
+Requires:	glib2-devel >= 1:2.16.0
+Requires:	gobject-introspection-devel >= 0.9.5
 Requires:	xulrunner-devel
 
 %description devel
@@ -109,4 +110,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_pkgconfigdir}/gjs-dbus-1.0.pc
 %{_pkgconfigdir}/gjs-gi-1.0.pc
+%{_pkgconfigdir}/gjs-internals-1.0.pc
 %{_examplesdir}/%{name}-%{version}
