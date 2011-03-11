@@ -1,24 +1,27 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	0.7.11
+Version:	0.7.13
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	fc253fae4de6d05bb238e873c574b7b5
+# Source0-md5:	34651aefe70762d10651b22c872ed0cc
 Patch0:		%{name}-rpath.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
+BuildRequires:	cairo-devel
+BuildRequires:	cairo-gobject-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.16.0
-BuildRequires:	gobject-introspection-devel >= 0.10.0
+BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	gobject-introspection-devel >= 0.10.1
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	xulrunner-devel
+BuildRequires:	readline-devel
+BuildRequires:	xulrunner-devel >= 1.9.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,7 +72,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 cp examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/gjs-1.0/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gjs-1.0/*.la \
+	$RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gjs-1.0/cairoNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/console.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/dbusNative.so
-#%attr(755,root,root) %{_libdir}/gjs-1.0/debugger.so
+%attr(755,root,root) %{_libdir}/gjs-1.0/debugger.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/gettextNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/gi.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/langNative.so
@@ -104,9 +108,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgjs-dbus.so
 %attr(755,root,root) %{_libdir}/libgjs-gi.so
 %attr(755,root,root) %{_libdir}/libgjs.so
-%{_libdir}/libgjs-dbus.la
-%{_libdir}/libgjs-gi.la
-%{_libdir}/libgjs.la
 %{_includedir}/gjs-1.0
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_pkgconfigdir}/gjs-dbus-1.0.pc
