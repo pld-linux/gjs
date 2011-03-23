@@ -22,6 +22,7 @@ BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 BuildRequires:	xulrunner-devel >= 1.9.2
+%requires_eq	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
