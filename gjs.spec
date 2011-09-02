@@ -67,7 +67,7 @@ Pliki nagłówkowe biblioteki gjs.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_datadir}/gir-1.0,%{_libdir}/girepository-1.0}
 
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -94,6 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgjs-gdbus.so.0
 %attr(755,root,root) %{_libdir}/libgjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgjs.so.0
+%dir %{_libdir}/gjs
+%{_libdir}/gjs/*.typelib
 %dir %{_libdir}/gjs-1.0
 %attr(755,root,root) %{_libdir}/gjs-1.0/cairoNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/console.so
@@ -109,6 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgjs-dbus.so
 %attr(755,root,root) %{_libdir}/libgjs-gdbus.so
 %attr(755,root,root) %{_libdir}/libgjs.so
+%{_libdir}/gjs/*.gir
 %{_includedir}/gjs-1.0
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_pkgconfigdir}/gjs-dbus-1.0.pc
