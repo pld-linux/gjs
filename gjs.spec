@@ -5,8 +5,8 @@ Version:	1.29.17
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.29/%{name}-%{version}.tar.bz2
-# Source0-md5:	3b06ff3f9f7a09b7b611d59acb606670
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.29/%{name}-%{version}.tar.xz
+# Source0-md5:	8bdb66c914ca9551635a3a4089ce3385
 Patch0:		%{name}-rpath.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
