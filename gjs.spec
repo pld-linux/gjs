@@ -1,12 +1,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	1.29.17
+Version:	1.29.18
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.29/%{name}-%{version}.tar.xz
-# Source0-md5:	8bdb66c914ca9551635a3a4089ce3385
+# Source0-md5:	a12f69951fe00973bc1a7df56be19f0d
 Patch0:		%{name}-rpath.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
@@ -40,7 +40,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.16.0
+Requires:	glib2-devel >= 1:2.18.0
 Requires:	gobject-introspection-devel >= 1.29.17
 Requires:	xulrunner-devel
 
@@ -61,8 +61,7 @@ Pliki nagłówkowe biblioteki gjs.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-silent-rules \
-	--enable-introspection
+	--disable-silent-rules
 %{__make}
 
 %install
