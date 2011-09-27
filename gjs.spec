@@ -1,14 +1,13 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	0.7.14
-Release:	7
+Version:	1.30.0
+Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/0.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	0e1487e066df8937317da34545f7b548
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.30/%{name}-%{version}.tar.xz
+# Source0-md5:	908c1c8654d141d64aac07d57de9a457
 Patch0:		%{name}-rpath.patch
-Patch1:		%{name}-xulrunner-5.0.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -17,7 +16,7 @@ BuildRequires:	cairo-gobject-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
-BuildRequires:	gobject-introspection-devel >= 0.10.1
+BuildRequires:	gobject-introspection-devel >= 1.29.17
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -41,8 +40,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.16.0
-Requires:	gobject-introspection-devel >= 0.9.5
+Requires:	glib2-devel >= 1:2.18.0
+Requires:	gobject-introspection-devel >= 1.29.17
 Requires:	xulrunner-devel
 
 %description devel
@@ -54,7 +53,6 @@ Pliki nagłówkowe biblioteki gjs.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -68,7 +66,7 @@ Pliki nagłówkowe biblioteki gjs.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_datadir}/gir-1.0,%{_libdir}/girepository-1.0}
 
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -91,17 +89,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gjs-console
 %attr(755,root,root) %{_libdir}/libgjs-dbus.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgjs-dbus.so.0
-%attr(755,root,root) %{_libdir}/libgjs-gi.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgjs-gi.so.0
+%attr(755,root,root) %{_libdir}/libgjs-gdbus.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgjs-gdbus.so.0
 %attr(755,root,root) %{_libdir}/libgjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgjs.so.0
+%dir %{_libdir}/gjs
+%{_libdir}/gjs/*.typelib
 %dir %{_libdir}/gjs-1.0
 %attr(755,root,root) %{_libdir}/gjs-1.0/cairoNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/console.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/dbusNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/debugger.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/gettextNative.so
-%attr(755,root,root) %{_libdir}/gjs-1.0/gi.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/langNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/mainloop.so
 %{_datadir}/gjs-1.0
@@ -109,11 +108,11 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgjs-dbus.so
-%attr(755,root,root) %{_libdir}/libgjs-gi.so
+%attr(755,root,root) %{_libdir}/libgjs-gdbus.so
 %attr(755,root,root) %{_libdir}/libgjs.so
+%{_libdir}/gjs/*.gir
 %{_includedir}/gjs-1.0
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_pkgconfigdir}/gjs-dbus-1.0.pc
-%{_pkgconfigdir}/gjs-gi-1.0.pc
 %{_pkgconfigdir}/gjs-internals-1.0.pc
 %{_examplesdir}/%{name}-%{version}

@@ -2,32 +2,20 @@ diff -ur gjs-0.7.4-o//configure.ac gjs-0.7.4/configure.ac
 --- gjs-0.7.4-o//configure.ac	2010-10-04 14:05:05.000000000 -0600
 +++ gjs-0.7.4/configure.ac	2010-10-14 23:12:27.000000000 -0600
 @@ -116,14 +116,14 @@
-     FIREFOX_JS_SDKDIR=`$PKG_CONFIG --variable=sdkdir $JS_PACKAGE`
-     FIREFOX_JS_LIBDIR=`$PKG_CONFIG --variable=libdir $JS_PACKAGE`
+         FIREFOX_JS_SDKDIR=`$PKG_CONFIG --variable=sdkdir $JS_PACKAGE`
+         FIREFOX_JS_LIBDIR=`$PKG_CONFIG --variable=libdir $JS_PACKAGE`
  
--    ## Ubuntu does not set libdir in mozilla-js.pc
-+    ## PLD does not set libdir in mozilla-js.pc
-     if test x"$FIREFOX_JS_LIBDIR" = x ; then
--       ## Ubuntu returns xulrunner-devel as the sdkdir, but for the
-+       ## PLD returns xulrunner-devel as the sdkdir, but for the
-        ## libdir we want the runtime location on the target system,
-        ## so can't use -devel.
-        ## The library is in the non-devel directory also.
-        ## Don't ask me why it's in two places.
--       FIREFOX_JS_LIBDIR=`echo "$FIREFOX_JS_SDKDIR" | sed -e 's/-devel//g'`
-+       FIREFOX_JS_LIBDIR=`echo "$FIREFOX_JS_SDKDIR" | sed -e 's/-sdk//g'`
- 
-        if ! test -d "$FIREFOX_JS_LIBDIR" ; then
-            FIREFOX_JS_LIBDIR=
-diff -ur gjs-0.7.4-o//Makefile-gi.am gjs-0.7.4/Makefile-gi.am
---- gjs-0.7.4-o//Makefile-gi.am	2010-09-17 06:49:48.000000000 -0600
-+++ gjs-0.7.4/Makefile-gi.am	2010-10-14 23:06:07.000000000 -0600
-@@ -10,7 +10,7 @@
-         libgjs.la			\
-         $(GJS_GI_LIBS)
- libgjs_gi_la_LDFLAGS = \
--	-export-symbols-regex "^[^_].*" -version-info 0:0:0 -rdynamic -no-undefined
-+	-export-symbols-regex "^[^_].*" -version-info 0:0:0 -rdynamic -no-undefined -R $(FIREFOX_JS_LIBDIR)
- 
- nobase_gjsgiinclude_HEADERS =	\
- 	gi/arg.h	\
+-        ## Ubuntu does not set libdir in mozilla-js.pc
++        ## PLD does not set libdir in mozilla-js.pc
+         if test x"$FIREFOX_JS_LIBDIR" = x; then
+-            ## Ubuntu returns xulrunner-devel as the sdkdir, but for the
++            ## PLD returns xulrunner-devel as the sdkdir, but for the
+             ## libdir we want the runtime location on the target system,
+             ## so can't use -devel.
+             ## The library is in the non-devel directory also.
+             ## Don't ask me why it's in two places.
+-            FIREFOX_JS_LIBDIR=`echo "$FIREFOX_JS_SDKDIR" | sed -e 's/-devel//g'`
++            FIREFOX_JS_LIBDIR=`echo "$FIREFOX_JS_SDKDIR" | sed -e 's/-sdk//g'`
+             if ! test -d "$FIREFOX_JS_LIBDIR"; then
+                 FIREFOX_JS_LIBDIR=
+             fi
