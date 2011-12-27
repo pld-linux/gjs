@@ -67,3 +67,41 @@
              iter = JSVAL_TO_PRIVATE(*state_p);
  
              importer_iterator_free(iter);
+--- gjs-1.30.0/gjs/jsapi-util.c.wiget	2011-12-27 16:52:47.661184351 +0100
++++ gjs-1.30.0/gjs/jsapi-util.c	2011-12-27 16:54:56.850873130 +0100
+@@ -407,7 +407,7 @@ gjs_object_get_property(JSContext  *cont
+ 
+     JS_EndRequest(context);
+ 
+-    return value != JSVAL_VOID;
++    return JSVAL_IS_VOID(value);
+ }
+ 
+ /* Returns whether the object had the property; if the object did
+@@ -434,7 +434,7 @@ gjs_object_require_property(JSContext
+     if (value_p)
+         *value_p = value;
+ 
+-    if (value != JSVAL_VOID) {
++    if (JSVAL_IS_VOID(value)) {
+         JS_ClearPendingException(context); /* in case JS_GetProperty() was on crack */
+         JS_EndRequest(context);
+         return TRUE;
+@@ -550,7 +550,7 @@ gjs_init_class_dynamic(JSContext      *c
+                                          class_copy->base.name, &value))
+             goto error;
+     }
+-    g_assert(value != JSVAL_VOID);
++    g_assert(JSVAL_IS_VOID(value));
+     g_assert(prototype != NULL);
+ 
+     /* Now manually define our constructor with a sane name, in the
+@@ -1277,7 +1277,7 @@ gjs_get_type_name(jsval value)
+ {
+     if (JSVAL_IS_NULL(value)) {
+         return "null";
+-    } else if (value == JSVAL_VOID) {
++    } else if (JSVAL_IS_VOID(value)) {
+         return "undefined";
+     } else if (JSVAL_IS_INT(value)) {
+         return "integer";
