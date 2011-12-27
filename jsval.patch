@@ -1,0 +1,69 @@
+--- gjs-1.30.0/modules/console.c.wiget	2011-12-27 16:42:01.069979148 +0100
++++ gjs-1.30.0/modules/console.c	2011-12-27 16:42:40.418340591 +0100
+@@ -224,7 +224,7 @@ gjs_console_interact(JSContext *context,
+         if (JS_GetPendingException(context, &result)) {
+             str = JS_ValueToString(context, result);
+             JS_ClearPendingException(context);
+-        } else if (result == JSVAL_VOID) {
++        } else if (JSVAL_IS_VOID(result)) {
+             goto next;
+         } else {
+             str = JS_ValueToString(context, result);
+--- gjs-1.30.0/gjs/byteArray.c.wiget	2011-12-27 16:37:55.066927188 +0100
++++ gjs-1.30.0/gjs/byteArray.c	2011-12-27 16:38:50.964585277 +0100
+@@ -775,7 +775,7 @@ from_array_func(JSContext *context,
+             goto out;
+         }
+ 
+-        if (elem == JSVAL_VOID)
++        if (JSVAL_IS_VOID(elem))
+             continue;
+ 
+         if (!gjs_value_to_byte(context, elem, &b))
+--- gjs-1.30.0/gjs/importer.c.wiget	2011-12-27 16:42:55.094396523 +0100
++++ gjs-1.30.0/gjs/importer.c	2011-12-27 16:45:12.555353498 +0100
+@@ -534,7 +534,7 @@ do_import(JSContext  *context,
+             goto out;
+         }
+ 
+-        if (elem == JSVAL_VOID)
++        if (JSVAL_IS_VOID(elem))
+             continue;
+ 
+         if (!JSVAL_IS_STRING(elem)) {
+@@ -566,7 +566,7 @@ do_import(JSContext  *context,
+                                         module_obj,
+                                         name,
+                                         &obj_val)) {
+-                if (obj_val != JSVAL_VOID &&
++                if (!JSVAL_IS_VOID(obj_val) &&
+                     JS_DefineProperty(context, obj,
+                                       name, obj_val,
+                                       NULL, NULL,
+@@ -793,7 +793,7 @@ importer_new_enumerate(JSContext  *conte
+                 return JS_FALSE;
+             }
+ 
+-            if (elem == JSVAL_VOID)
++            if (JSVAL_IS_VOID(elem))
+                 continue;
+ 
+             if (!JSVAL_IS_STRING(elem)) {
+@@ -868,7 +868,7 @@ importer_new_enumerate(JSContext  *conte
+             return JS_FALSE;
+         }
+ 
+-        if (*state_p == JSVAL_NULL) /* Iterating prototype */
++        if (JSVAL_IS_NULL(*state_p)) /* Iterating prototype */
+             return JS_TRUE;
+ 
+         iter = JSVAL_TO_PRIVATE(*state_p);
+@@ -890,7 +890,7 @@ importer_new_enumerate(JSContext  *conte
+     }
+ 
+     case JSENUMERATE_DESTROY: {
+-        if (state_p && *state_p != JSVAL_NULL) {
++        if (state_p && JSVAL_IS_NULL(*state_p)) {
+             iter = JSVAL_TO_PRIVATE(*state_p);
+ 
+             importer_iterator_free(iter);
