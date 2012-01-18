@@ -1,15 +1,14 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	1.30.0
-Release:	9
+Version:	1.30.1
+Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.30/%{name}-%{version}.tar.xz
-# Source0-md5:	908c1c8654d141d64aac07d57de9a457
+# Source0-md5:	7f8842aea298a033f0c8d725278e1e50
 Patch0:		%{name}-rpath.patch
 Patch1:		am.patch
-Patch2:		jsval.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -19,12 +18,11 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	gobject-introspection-devel >= 1.29.17
+BuildRequires:	js185-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
-BuildRequires:	xulrunner-devel >= 1.9.2
-%requires_eq	xulrunner-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,7 +42,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
 Requires:	glib2-devel >= 1:2.18.0
 Requires:	gobject-introspection-devel >= 1.29.17
-Requires:	xulrunner-devel
+Requires:	js185-devel
 
 %description devel
 Header files for gjs library.
@@ -56,7 +54,6 @@ Pliki nagłówkowe biblioteki gjs.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -66,6 +63,7 @@ Pliki nagłówkowe biblioteki gjs.
 %{__automake}
 %configure \
 	--disable-silent-rules
+	--with-js-package=mozjs185
 %{__make}
 
 %install
