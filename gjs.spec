@@ -62,7 +62,7 @@ Pliki nagłówkowe biblioteki gjs.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-silent-rules
+	--disable-silent-rules \
 	--with-js-package=mozjs185
 %{__make}
 
