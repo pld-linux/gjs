@@ -1,14 +1,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	1.30.1
+Version:	1.32.0
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.30/%{name}-%{version}.tar.xz
-# Source0-md5:	7f8842aea298a033f0c8d725278e1e50
-Patch0:		%{name}-rpath.patch
-Patch1:		am.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.32/%{name}-%{version}.tar.xz
+# Source0-md5:	a77fe0edb6f681434d8360c62e471abf
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -16,13 +14,14 @@ BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.18.0
-BuildRequires:	gobject-introspection-devel >= 1.29.17
+BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	gobject-introspection-devel >= 1.32.0
 BuildRequires:	js185-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
+Requires:	glib2 >= 1:2.32.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,8 +39,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.18.0
-Requires:	gobject-introspection-devel >= 1.29.17
+Requires:	glib2-devel >= 1:2.32.0
+Requires:	gobject-introspection-devel >= 1.32.0
 Requires:	js185-devel
 
 %description devel
@@ -52,8 +51,6 @@ Pliki nagłówkowe biblioteki gjs.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -62,13 +59,12 @@ Pliki nagłówkowe biblioteki gjs.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-silent-rules \
-	--with-js-package=mozjs185
+	--disable-silent-rules
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_datadir}/gir-1.0,%{_libdir}/girepository-1.0}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -95,8 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgjs-gdbus.so.0
 %attr(755,root,root) %{_libdir}/libgjs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgjs.so.0
-%dir %{_libdir}/gjs
-%{_libdir}/gjs/*.typelib
+%{_libdir}/girepository-1.0/GjsDBus-1.0.typelib
 %dir %{_libdir}/gjs-1.0
 %attr(755,root,root) %{_libdir}/gjs-1.0/cairoNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/console.so
@@ -105,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gjs-1.0/gettextNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/langNative.so
 %attr(755,root,root) %{_libdir}/gjs-1.0/mainloop.so
+%attr(755,root,root) %{_libdir}/gjs-1.0/system.so
 %{_datadir}/gjs-1.0
 
 %files devel
@@ -112,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgjs-dbus.so
 %attr(755,root,root) %{_libdir}/libgjs-gdbus.so
 %attr(755,root,root) %{_libdir}/libgjs.so
-%{_libdir}/gjs/*.gir
+%{_datadir}/gir-1.0/GjsDBus-1.0.gir
 %{_includedir}/gjs-1.0
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_pkgconfigdir}/gjs-dbus-1.0.pc
