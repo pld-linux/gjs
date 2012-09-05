@@ -1,12 +1,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
 Name:		gjs
-Version:	1.33.9
+Version:	1.33.10
 Release:	1
 License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.33/%{name}-%{version}.tar.xz
-# Source0-md5:	6a13b69e9252b88928b3c4404cdb68bb
+# Source0-md5:	53aef78fe6029400e2d4f48f23aac000
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -15,7 +15,7 @@ BuildRequires:	cairo-gobject-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.32.0
-BuildRequires:	gobject-introspection-devel >= 1.33.2
+BuildRequires:	gobject-introspection-devel >= 1.33.10
 BuildRequires:	js185-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
