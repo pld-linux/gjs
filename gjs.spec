@@ -1,9 +1,9 @@
 Summary:	JavaScript bindings for GNOME
-Summary(pl.UTF-8):	Wiązania JavaScript dla GNOME
+Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
 Version:	1.34.0
 Release:	2
-License:	MIT and (MPL v1.1 / GPL v2+ / LGPL v2+)
+License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.34/%{name}-%{version}.tar.xz
 # Source0-md5:	736f11821d785512bc92c0fe50968c5a
@@ -31,8 +31,8 @@ on Spidermonkey JavaScript engine and the GObject introspection
 framework.
 
 %description -l pl.UTF-8
-Gjs pozwala używać bibliotek GNOME z JavaScript. Bazuje głównie na
-silniku JavaScript Spidermonkey i systemie GObject introspection.
+Gjs pozwala używać bibliotek GNOME z JavaScriptem. Jest oparty głównie
+na silniku JavaScriptu Spidermonkey i systemie GObject introspection.
 
 %package devel
 Summary:	Header files for gjs library
@@ -41,7 +41,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
 Requires:	glib2-devel >= 1:2.32.0
-Requires:	gobject-introspection-devel >= 1.33.2
+Requires:	gobject-introspection-devel >= 1.33.10
 Requires:	js185-devel
 
 %description devel
