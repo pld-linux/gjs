@@ -1,4 +1,6 @@
-#TODO: systemtap/dtrace
+#
+# Conditional build:
+%bcond_without	systemtap	# systemtap/dtrace trace support
 #
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
@@ -9,6 +11,7 @@ License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.38/%{name}-%{version}.tar.xz
 # Source0-md5:	0f3422a114cb69735274e75e325013a3
+Patch0:		%{name}-systemtap.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -17,12 +20,13 @@ BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 1.38.0
-BuildRequires:	mozjs17-devel
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	mozjs17-devel
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
+%{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 Requires:	glib2 >= 1:2.36.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,8 +46,8 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
 Requires:	glib2-devel >= 1:2.36.0
-Requires:	gobject-introspection-devel >= 1.36.0
-Requires:	js185-devel
+Requires:	gobject-introspection-devel >= 1.38.0
+Requires:	mozjs17-devel
 
 %description devel
 Header files for gjs library.
@@ -51,8 +55,22 @@ Header files for gjs library.
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki gjs.
 
+%package -n systemtap-gjs
+Summary:	systemtap/dtrace probes for gjs
+Summary(pl.UTF-8):	Sondy systemtap/dtrace dla gjs
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
+Requires:	systemtap-client
+
+%description -n systemtap-gjs
+systemtap/dtrace probes for gjs.
+
+%description -n systemtap-gjs -l pl.UTF-8
+Sondy systemtap/dtrace dla gjs.
+
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -61,7 +79,8 @@ Pliki nagłówkowe biblioteki gjs.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-silent-rules
+	--disable-silent-rules \
+	%{?with_systemtap:--enable-systemtap}
 %{__make}
 
 %install
@@ -100,3 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_pkgconfigdir}/gjs-internals-1.0.pc
 %{_examplesdir}/%{name}-%{version}
+
+%files -n systemtap-gjs
+%defattr(644,root,root,755)
+%{_datadir}/systemtap/tapset/gjs.stp
