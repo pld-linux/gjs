@@ -5,12 +5,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.38.1
+Version:	1.40.0
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.38/%{name}-%{version}.tar.xz
-# Source0-md5:	0f3422a114cb69735274e75e325013a3
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.40/%{name}-%{version}.tar.xz
+# Source0-md5:	17f0ce474fbe6dda423a97c7f22fb073
 Patch0:		%{name}-systemtap.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
@@ -19,11 +19,12 @@ BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.36.0
-BuildRequires:	gobject-introspection-devel >= 1.38.0
+BuildRequires:	gobject-introspection-devel >= 1.39.3
+BuildRequires:	gtk+3-devel
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	mozjs17-devel
+BuildRequires:	mozjs24-devel
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
@@ -46,8 +47,8 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
 Requires:	glib2-devel >= 1:2.36.0
-Requires:	gobject-introspection-devel >= 1.38.0
-Requires:	mozjs17-devel
+Requires:	gobject-introspection-devel >= 1.39.3
+Requires:	mozjs24-devel
 
 %description devel
 Header files for gjs library.
@@ -110,7 +111,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/gjs
 %dir %{_libdir}/gjs/girepository-1.0
 %{_libdir}/gjs/girepository-1.0/GjsPrivate-1.0.typelib
-%{_datadir}/gjs-1.0
 
 %files devel
 %defattr(644,root,root,755)
