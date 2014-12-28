@@ -17,7 +17,7 @@ BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 1.41.4
 BuildRequires:	gtk+3-devel
