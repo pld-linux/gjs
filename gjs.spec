@@ -5,12 +5,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.42.0
-Release:	4
+Version:	1.43.3
+Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.42/%{name}-%{version}.tar.xz
-# Source0-md5:	a30ff5e3e13498c4d3c95d2555751c4d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.43/%{name}-%{version}.tar.xz
+# Source0-md5:	5efde4730e1ff3b943915ed152085a1e
 Patch0:		%{name}-systemtap.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
