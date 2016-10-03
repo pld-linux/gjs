@@ -5,12 +5,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.44.0
+Version:	1.46.0
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.44/%{name}-%{version}.tar.xz
-# Source0-md5:	a79cb5338be0a31ed0882279bc59e48f
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.46/%{name}-%{version}.tar.xz
+# Source0-md5:	25574b60f4e1173fee0bd4920231df3e
 Patch0:		%{name}-systemtap.patch
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.61
@@ -18,7 +18,8 @@ BuildRequires:	automake
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.36.0
+BuildRequires:	glib2-devel >= 1:2.42.0
+BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 1.41.4
 BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	libffi-devel
@@ -28,7 +29,7 @@ BuildRequires:	mozjs24-devel
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
-Requires:	glib2 >= 1:2.36.0
+Requires:	glib2 >= 1:2.42.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,7 +47,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.36.0
+Requires:	glib2-devel >= 1:2.42.0
 Requires:	gobject-introspection-devel >= 1.41.4
 Requires:	mozjs24-devel
 
