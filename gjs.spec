@@ -5,31 +5,31 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.46.0
-Release:	2
+Version:	1.48.0
+Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.46/%{name}-%{version}.tar.xz
-# Source0-md5:	25574b60f4e1173fee0bd4920231df3e
-Patch0:		%{name}-systemtap.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.48/%{name}-%{version}.tar.xz
+# Source0-md5:	b4016f257c99ba559b7ad2dc800b6e2e
 URL:		http://live.gnome.org/Gjs
-BuildRequires:	autoconf >= 2.61
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.64
+BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.42.0
+BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 1.41.4
-BuildRequires:	gtk+3-devel >= 3.0
+BuildRequires:	gtk+3-devel >= 3.20
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	mozjs24-devel
+BuildRequires:	mozjs38-devel
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
-Requires:	glib2 >= 1:2.42.0
+Requires:	glib2 >= 1:2.50.0
+Requires:	gtk+3 >= 3.20
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,9 +47,10 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	dbus-devel
-Requires:	glib2-devel >= 1:2.42.0
+Requires:	glib2-devel >= 1:2.50.0
 Requires:	gobject-introspection-devel >= 1.41.4
-Requires:	mozjs24-devel
+Requires:	gtk+3-devel >= 3.20
+Requires:	mozjs38-devel
 
 %description devel
 Header files for gjs library.
@@ -72,7 +73,6 @@ Sondy systemtap/dtrace dla gjs.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -118,7 +118,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgjs.so
 %{_includedir}/gjs-1.0
 %{_pkgconfigdir}/gjs-1.0.pc
-%{_pkgconfigdir}/gjs-internals-1.0.pc
 %{_examplesdir}/%{name}-%{version}
 
 %files -n systemtap-gjs
