@@ -18,12 +18,11 @@ BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.50.0
-BuildRequires:	gnome-common
 BuildRequires:	gobject-introspection-devel >= 1.41.4
 BuildRequires:	gtk+3-devel >= 3.20
 BuildRequires:	libffi-devel
-BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libtool >= 2:2.2.0
 BuildRequires:	mozjs38-devel
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
@@ -46,10 +45,12 @@ Summary:	Header files for gjs library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	dbus-devel
+Requires:	cairo-devel
+Requires:	cairo-gobject-devel
 Requires:	glib2-devel >= 1:2.50.0
 Requires:	gobject-introspection-devel >= 1.41.4
 Requires:	gtk+3-devel >= 3.20
+Requires:	libffi-devel
 Requires:	mozjs38-devel
 
 %description devel
