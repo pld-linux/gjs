@@ -5,12 +5,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.52.0
+Version:	1.54.3
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.52/%{name}-%{version}.tar.xz
-# Source0-md5:	5f626919a37b75d1b652be6da8723f41
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.54/%{name}-%{version}.tar.xz
+# Source0-md5:	387dd08d40d4f1f1ffec9546b52e7619
 URL:		http://live.gnome.org/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
@@ -23,7 +23,7 @@ BuildRequires:	gtk+3-devel >= 3.20
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2.2.0
-BuildRequires:	mozjs52-devel
+BuildRequires:	mozjs60-devel
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
@@ -51,7 +51,7 @@ Requires:	glib2-devel >= 1:2.50.0
 Requires:	gobject-introspection-devel >= 1.41.4
 Requires:	gtk+3-devel >= 3.20
 Requires:	libffi-devel
-Requires:	mozjs52-devel
+Requires:	mozjs60-devel
 
 %description devel
 Header files for gjs library.
