@@ -1,0 +1,12 @@
+Fixes build in C++14 mode (insert(pair&&) is C++17)
+--- gjs-1.56.2/gi/gtype.cpp.orig	2019-05-08 01:34:52.000000000 +0200
++++ gjs-1.56.2/gi/gtype.cpp	2019-05-24 15:52:21.984123467 +0200
+@@ -172,7 +172,7 @@
+     /* Saving a reference to the wrapper pointer, as heap_wrapper will be
+      * nullified by std::move */
+     JSObject *gtype_wrapper = *heap_wrapper;
+-    weak_pointer_list.insert({gtype, std::move(heap_wrapper)});
++    weak_pointer_list.emplace(gtype, std::move(heap_wrapper));
+ 
+     return gtype_wrapper;
+ }

@@ -5,29 +5,30 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.54.3
+Version:	1.56.2
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.54/%{name}-%{version}.tar.xz
-# Source0-md5:	387dd08d40d4f1f1ffec9546b52e7619
-URL:		http://live.gnome.org/Gjs
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.56/%{name}-%{version}.tar.xz
+# Source0-md5:	6744153c56e958ad496021062e21823f
+Patch0:		%{name}-noc++17.patch
+URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	glib2-devel >= 1:2.54.0
 BuildRequires:	gobject-introspection-devel >= 1.41.4
 BuildRequires:	gtk+3-devel >= 3.20
 BuildRequires:	libffi-devel
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:5.0
 BuildRequires:	libtool >= 2:2.2.0
-BuildRequires:	mozjs60-devel
+BuildRequires:	mozjs60-devel >= 60
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
-Requires:	glib2 >= 1:2.50.0
+Requires:	glib2 >= 1:2.54.0
 Requires:	gtk+3 >= 3.20
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,11 +48,11 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel
 Requires:	cairo-gobject-devel
-Requires:	glib2-devel >= 1:2.50.0
+Requires:	glib2-devel >= 1:2.54.0
 Requires:	gobject-introspection-devel >= 1.41.4
 Requires:	gtk+3-devel >= 3.20
 Requires:	libffi-devel
-Requires:	mozjs60-devel
+Requires:	mozjs60-devel >= 60
 
 %description devel
 Header files for gjs library.
@@ -74,6 +75,7 @@ Sondy systemtap/dtrace dla gjs.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
