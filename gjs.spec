@@ -1,35 +1,35 @@
 #
 # Conditional build:
+%bcond_without	sysprof		# sysprof profiling
 %bcond_without	systemtap	# systemtap/dtrace trace support
 #
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.56.2
+Version:	1.58.1
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.56/%{name}-%{version}.tar.xz
-# Source0-md5:	6744153c56e958ad496021062e21823f
-Patch0:		%{name}-noc++17.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.58/%{name}-%{version}.tar.xz
+# Source0-md5:	49ae54cccbf212e2f80fa1726d5f974c
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.54.0
+BuildRequires:	glib2-devel >= 1:2.58.0
 BuildRequires:	gobject-introspection-devel >= 1.41.4
-BuildRequires:	gtk+3-devel >= 3.20
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:5.0
 BuildRequires:	libtool >= 2:2.2.0
 BuildRequires:	mozjs60-devel >= 60
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
+# pkgconfig(sysprof-capture-3)
+%{?with_sysprof:BuildRequires:	sysprof-devel >= 3.34}
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
-Requires:	glib2 >= 1:2.54.0
-Requires:	gtk+3 >= 3.20
+Requires:	glib2 >= 1:2.58.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,9 +48,8 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel
 Requires:	cairo-gobject-devel
-Requires:	glib2-devel >= 1:2.54.0
+Requires:	glib2-devel >= 1:2.58.0
 Requires:	gobject-introspection-devel >= 1.41.4
-Requires:	gtk+3-devel >= 3.20
 Requires:	libffi-devel
 Requires:	mozjs60-devel >= 60
 
@@ -75,7 +74,6 @@ Sondy systemtap/dtrace dla gjs.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -84,6 +82,7 @@ Sondy systemtap/dtrace dla gjs.
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-profiler%{!?with_sysprof:=no} \
 	--disable-silent-rules \
 	%{?with_systemtap:--enable-systemtap}
 %{__make}
@@ -95,9 +94,12 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cp examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -p examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
+# obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+# belongs to installed-tests
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.GjsTest.gschema.xml
 
 %clean
 rm -rf $RPM_BUILD_ROOT
