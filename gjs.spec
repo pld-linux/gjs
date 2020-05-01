@@ -6,12 +6,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.58.5
-Release:	3
+Version:	1.65.1
+Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.58/%{name}-%{version}.tar.xz
-# Source0-md5:	4e74456ccb16d4cc5004a441f6abbec1
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.65/%{name}-%{version}.tar.xz
+# Source0-md5:	5f002a489eb2bd6ad39b07294f7142ae
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
@@ -23,7 +23,7 @@ BuildRequires:	gobject-introspection-devel >= 1.41.4
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:5.0
 BuildRequires:	libtool >= 2:2.2.0
-BuildRequires:	mozjs60-devel >= 60
+BuildRequires:	mozjs68-devel >= 68
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 # pkgconfig(sysprof-capture-3)
@@ -78,30 +78,24 @@ Sondy systemtap/dtrace dla gjs.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--enable-profiler%{!?with_sysprof:=no} \
-	--disable-silent-rules \
-	%{?with_systemtap:--enable-systemtap}
-%{__make}
+%meson build \
+	-Dprofiler=%{?with_sysprof:enabled}%{!?with_sysprof:disabled} \
+	-Dsystemtap=%{__true_false systemtap} \
+	-Ddtrace=%{__true_false systemtap}
+
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__make} -j1 install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 cp -p examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-# obsoleted by pkg-config
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 # belongs to installed-tests
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.GjsTest.gschema.xml
+%{__rm} -r $RPM_BUILD_ROOT{%{_datadir},%{_libexecdir}/gjs}/installed-tests
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -111,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING NEWS README
+%doc COPYING NEWS README.md
 %attr(755,root,root) %{_bindir}/gjs
 %attr(755,root,root) %{_bindir}/gjs-console
 %attr(755,root,root) %{_libdir}/libgjs.so.*.*.*
