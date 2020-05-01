@@ -11,7 +11,7 @@ Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.64/%{name}-%{version}.tar.xz
-# Source0-md5:	5f002a489eb2bd6ad39b07294f7142ae
+# Source0-md5:	bd2f7f411b46016e8ee2d2c8d3c140d9
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
