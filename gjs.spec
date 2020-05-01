@@ -19,13 +19,16 @@ BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.58.0
-BuildRequires:	gobject-introspection-devel >= 1.41.4
+BuildRequires:	gobject-introspection-devel >= 1.61.2
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:5.0
 BuildRequires:	libtool >= 2:2.2.0
+BuildRequires:	meson >= 0.50.0
 BuildRequires:	mozjs68-devel >= 68
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
+BuildRequires:	rpmbuild(macros) >= 1.736
 # pkgconfig(sysprof-capture-3)
 %{?with_sysprof:BuildRequires:	sysprof-devel >= 3.34}
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
@@ -51,7 +54,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel
 Requires:	cairo-gobject-devel
 Requires:	glib2-devel >= 1:2.58.0
-Requires:	gobject-introspection-devel >= 1.41.4
+Requires:	gobject-introspection-devel >= 1.61.2
 Requires:	libffi-devel
 Requires:	mozjs60-devel >= 60
 
