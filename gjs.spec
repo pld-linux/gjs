@@ -6,12 +6,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.64.4
-Release:	2
+Version:	1.66.0
+Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.64/%{name}-%{version}.tar.xz
-# Source0-md5:	dc0d4a0453484c5a77eb0e2bda091704
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.66/%{name}-%{version}.tar.xz
+# Source0-md5:	d43a936f5edd8ff36ecc54684b26d82a
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
@@ -21,16 +21,16 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.58.0
 BuildRequires:	gobject-introspection-devel >= 1.61.2
 BuildRequires:	libffi-devel
-BuildRequires:	libstdc++-devel >= 6:5.0
+BuildRequires:	libstdc++-devel >= 6:7.0
 BuildRequires:	libtool >= 2:2.2.0
-BuildRequires:	meson >= 0.50.0
-BuildRequires:	mozjs68-devel >= 68
+BuildRequires:	meson >= 0.52.0
+BuildRequires:	mozjs78-devel >= 78
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 BuildRequires:	rpmbuild(macros) >= 1.736
-# pkgconfig(sysprof-capture-3)
-%{?with_sysprof:BuildRequires:	sysprof-devel >= 3.34}
+# pkgconfig(sysprof-capture-4)
+%{?with_sysprof:BuildRequires:	sysprof-devel >= 3.36}
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -56,7 +56,7 @@ Requires:	cairo-gobject-devel
 Requires:	glib2-devel >= 1:2.58.0
 Requires:	gobject-introspection-devel >= 1.61.2
 Requires:	libffi-devel
-Requires:	mozjs68-devel >= 68
+Requires:	mozjs78-devel >= 78
 
 %description devel
 Header files for gjs library.
@@ -98,7 +98,7 @@ cp -p examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 # belongs to installed-tests
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/glib-2.0/schemas/org.gnome.GjsTest.gschema.xml
-%{__rm} -r $RPM_BUILD_ROOT{%{_datadir},%{_libexecdir}/gjs}/installed-tests
+%{__rm} -r $RPM_BUILD_ROOT{%{_datadir},%{_libexecdir}}/installed-tests
 
 %clean
 rm -rf $RPM_BUILD_ROOT
