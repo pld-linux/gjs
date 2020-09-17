@@ -7,7 +7,7 @@ Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
 Version:	1.64.4
-Release:	1
+Release:	2
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gjs/1.64/%{name}-%{version}.tar.xz
@@ -56,7 +56,7 @@ Requires:	cairo-gobject-devel
 Requires:	glib2-devel >= 1:2.58.0
 Requires:	gobject-introspection-devel >= 1.61.2
 Requires:	libffi-devel
-Requires:	mozjs60-devel >= 60
+Requires:	mozjs68-devel >= 68
 
 %description devel
 Header files for gjs library.
