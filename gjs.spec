@@ -125,6 +125,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/gjs-1.0.pc
 %{_examplesdir}/%{name}-%{version}
 
+%if %{with systemtap}
 %files -n systemtap-gjs
 %defattr(644,root,root,755)
 %{_datadir}/systemtap/tapset/gjs.stp
+%endif
