@@ -6,20 +6,20 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.66.2
+Version:	1.68.0
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gjs/1.66/%{name}-%{version}.tar.xz
-# Source0-md5:	3c272f27a2ce18c82261698520b1147f
+Source0:	https://download.gnome.org/sources/gjs/1.68/%{name}-%{version}.tar.xz
+# Source0-md5:	ca06aee4b29f422b7c1463e390f75edb
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.58.0
-BuildRequires:	gobject-introspection-devel >= 1.61.2
+BuildRequires:	glib2-devel >= 1:2.66.0
+BuildRequires:	gobject-introspection-devel >= 1.66.1
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:7.0
 BuildRequires:	libtool >= 2:2.2.0
@@ -28,13 +28,14 @@ BuildRequires:	mozjs78-devel >= 78
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 # pkgconfig(sysprof-capture-4)
 %{?with_sysprof:BuildRequires:	sysprof-devel >= 3.36}
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.58.0
+Requires:	glib2 >= 1:2.66.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,8 +54,8 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel
 Requires:	cairo-gobject-devel
-Requires:	glib2-devel >= 1:2.58.0
-Requires:	gobject-introspection-devel >= 1.61.2
+Requires:	glib2-devel >= 1:2.66.0
+Requires:	gobject-introspection-devel >= 1.66.0
 Requires:	libffi-devel
 Requires:	mozjs78-devel >= 78
 
@@ -70,6 +71,7 @@ Summary(pl.UTF-8):	Sondy systemtap/dtrace dla gjs
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Requires:	systemtap-client
+BuildArch:	noarch
 
 %description -n systemtap-gjs
 systemtap/dtrace probes for gjs.
