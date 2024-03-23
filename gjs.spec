@@ -6,12 +6,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.78.4
+Version:	1.80.1
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gjs/1.78/%{name}-%{version}.tar.xz
-# Source0-md5:	7f6bccf39a4c03427945f74e70c3a399
+Source0:	https://download.gnome.org/sources/gjs/1.80/%{name}-%{version}.tar.xz
+# Source0-md5:	ef7237f73478b0d9f7f399824bccde74
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
@@ -20,7 +20,7 @@ BuildRequires:	glib2-devel >= 1:2.66.0
 BuildRequires:	gobject-introspection-devel >= 1.66.1
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:7.0
-BuildRequires:	meson >= 0.54.0
+BuildRequires:	meson >= 0.58.0
 BuildRequires:	mozjs115-devel >= 115
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
