@@ -6,12 +6,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.80.1
+Version:	1.80.2
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gjs/1.80/%{name}-%{version}.tar.xz
-# Source0-md5:	ef7237f73478b0d9f7f399824bccde74
+# Source0-md5:	ae896ab9a1c5589b86fde94a45a2fcd9
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
