@@ -6,12 +6,12 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.80.2
+Version:	1.82.0
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gjs/1.80/%{name}-%{version}.tar.xz
-# Source0-md5:	ae896ab9a1c5589b86fde94a45a2fcd9
+Source0:	https://download.gnome.org/sources/gjs/1.82/%{name}-%{version}.tar.xz
+# Source0-md5:	7804016a6218c51660272b47cf7ac43f
 URL:		https://wiki.gnome.org/Projects/Gjs
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
@@ -20,8 +20,8 @@ BuildRequires:	glib2-devel >= 1:2.66.0
 BuildRequires:	gobject-introspection-devel >= 1.66.1
 BuildRequires:	libffi-devel
 BuildRequires:	libstdc++-devel >= 6:7.0
-BuildRequires:	meson >= 0.58.0
-BuildRequires:	mozjs115-devel >= 115
+BuildRequires:	meson >= 0.62.0
+BuildRequires:	mozjs128-devel >= 128
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
@@ -54,7 +54,7 @@ Requires:	cairo-gobject-devel
 Requires:	glib2-devel >= 1:2.66.0
 Requires:	gobject-introspection-devel >= 1.66.0
 Requires:	libffi-devel
-Requires:	mozjs115-devel >= 115
+Requires:	mozjs128-devel >= 128
 
 %description devel
 Header files for gjs library.
