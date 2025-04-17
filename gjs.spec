@@ -6,33 +6,34 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.82.1
+Version:	1.84.2
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gjs/1.82/%{name}-%{version}.tar.xz
-# Source0-md5:	3ebc85da56719932d4d8f713ffbcf786
-URL:		https://wiki.gnome.org/Projects/Gjs
+Source0:	https://download.gnome.org/sources/gjs/1.84/%{name}-%{version}.tar.xz
+# Source0-md5:	5083ed4dc52910eebbbfb17198d8ef8e
+URL:		https://gitlab.gnome.org/GNOME/gjs/-/wikis/Home
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.66.0
-BuildRequires:	gobject-introspection-devel >= 1.66.1
+BuildRequires:	glib2-devel >= 1:2.68.0
+BuildRequires:	gobject-introspection-devel >= 1.72.0
 BuildRequires:	libffi-devel
-BuildRequires:	libstdc++-devel >= 6:7.0
-BuildRequires:	meson >= 0.62.0
+# C++17, but gcc<12 hits https://gcc.gnu.org/bugzilla/show_bug.cgi?id=67829
+BuildRequires:	libstdc++-devel >= 6:12
+BuildRequires:	meson >= 1.4
 BuildRequires:	mozjs128-devel >= 128
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 # pkgconfig(sysprof-capture-4)
 %{?with_sysprof:BuildRequires:	sysprof-devel >= 3.36}
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.66.0
+Requires:	glib2 >= 1:2.68.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,8 +52,8 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cairo-devel
 Requires:	cairo-gobject-devel
-Requires:	glib2-devel >= 1:2.66.0
-Requires:	gobject-introspection-devel >= 1.66.0
+Requires:	glib2-devel >= 1:2.68.0
+Requires:	gobject-introspection-devel >= 1.72.0
 Requires:	libffi-devel
 Requires:	mozjs128-devel >= 128
 
@@ -80,18 +81,19 @@ Sondy systemtap/dtrace dla gjs.
 %setup -q
 
 %build
-%meson build \
-	-Dprofiler=%{?with_sysprof:enabled}%{!?with_sysprof:disabled} \
-	-Dsystemtap=%{__true_false systemtap} \
-	-Ddtrace=%{__true_false systemtap}
+%meson \
+	-Ddtrace=%{__true_false systemtap} \
+	-Dreadline=enabled \
+	-Dprofiler=%{__enabled_disabled sysprof} \
+	-Dsystemtap=%{__true_false systemtap}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%ninja_install -C build
+%meson_install
 
 cp -p examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
