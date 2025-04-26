@@ -36,6 +36,10 @@ BuildRequires:	xz
 Requires:	glib2 >= 1:2.68.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# dtrace script expects CPP to be cpp, not "gcc -E", so force it regardless of rpm version
+# (autotools-based rpm<4.19 used to have "gcc -E", cmake builds for 4.19+ switched to cpp)
+%define		__cpp	cpp
+
 %description
 Gjs allows using GNOME libraries from JavaScript. It is mainly based
 on Spidermonkey JavaScript engine and the GObject introspection
