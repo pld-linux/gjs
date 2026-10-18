@@ -6,15 +6,16 @@
 Summary:	JavaScript bindings for GNOME
 Summary(pl.UTF-8):	Wiązania JavaScriptu dla GNOME
 Name:		gjs
-Version:	1.88.1
+Version:	1.90.1
 Release:	1
 License:	MIT and (MPL v1.1 or GPL v2+ or LGPL v2+)
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gjs/1.88/%{name}-%{version}.tar.xz
-# Source0-md5:	851963b653cbcf8534dff8b9e719592e
+Source0:	https://download.gnome.org/sources/gjs/1.90/%{name}-%{version}.tar.xz
+# Source0-md5:	3b5772fc1a131e730879f5b3887b4950
 URL:		https://gitlab.gnome.org/GNOME/gjs/-/wikis/Home
 BuildRequires:	cairo-devel
 BuildRequires:	cairo-gobject-devel
+BuildRequires:	gcc >= 5:3.2
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.86.0
 BuildRequires:	gobject-introspection-devel >= 1.72.0
@@ -33,7 +34,7 @@ BuildRequires:	rpmbuild(macros) >= 2.042
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.86.0
+Requires:	glib2%{?_isa} >= 1:2.86.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # dtrace script expects CPP to be cpp, not "gcc -E", so force it regardless of rpm version
@@ -54,12 +55,12 @@ Summary:	Header files for gjs library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gjs
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	cairo-devel
-Requires:	cairo-gobject-devel
-Requires:	glib2-devel >= 1:2.86.0
-Requires:	gobject-introspection-devel >= 1.72.0
-Requires:	libffi-devel
-Requires:	mozjs140-devel >= 140
+Requires:	cairo-devel%{?_isa}
+Requires:	cairo-gobject-devel%{?_isa}
+Requires:	glib2-devel%{?_isa} >= 1:2.86.0
+Requires:	gobject-introspection-devel%{?_isa} >= 1.72.0
+Requires:	libffi-devel%{?_isa}
+Requires:	mozjs140-devel%{?_isa} >= 140
 
 %description devel
 Header files for gjs library.
